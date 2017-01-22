@@ -1,0 +1,11 @@
+<h1 class="page-header">{title}</h1>
+
+<h2 class="sub-header">{subTitle}</h2>
+<ul class="list-group">
+    {#list depends as dep}
+  <li class="list-group-item">
+    <span class="badge">{dep.ver}</span>
+    {dep.name}
+  </li>
+    {/list}
+</ul>

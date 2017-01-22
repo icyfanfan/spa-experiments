@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        {#list thList as th}
+        <th>{th.title}</th>
+        {/list}
+        <th>operate</th>
+      </tr>
+    </thead>
+    <tbody>
+        {#list tbList as tb}
+            <tr class="">
+                {#list thList as th}
+                <td>{tb[th.title]}</td>
+                {/list}
+                <td>
+                    <div class="btn-group" role="group">
+                    <a class="btn btn-sm btn-default" on-click={this.onLink('app.test1.edit',tb)} >edit</a>
+                    <a class="btn btn-sm btn-default" on-click={this.onLink('app.test1.detail',tb)}>view</a>
+                    </div>
+                </td>
+            </tr>
+        {/list}
+    </tbody>
+</table>

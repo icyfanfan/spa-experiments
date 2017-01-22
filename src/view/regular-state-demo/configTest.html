@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>OPEN console to find the log</h2>
+
+    <ul>
+        <li><strong>(app)</strong> <a href="#/app">/app </a></li>
+        <li><strong>(app.contact)</strong> <a href="#/app/contact">/app/contact </a></li>
+        <li><strong>(app.contact.message)</strong> <a href="#/app/contact/message">/app/contact/message </a></li>
+        <li>
+            <strong>(app.contact.detail)</strong>
+            <strong>url:"^/detail/:id(\\d+)"</strong>
+            <a href="#/detail/2?name=leeluolee">/detail/2?name=leeluolee </a>
+            <p><strong>绝对路径，所有detail的子状态(如detail.setting)都会受影响</strong></p>
+            
+        </li>
+        <li><strong>(app.contact.detail.setting)</strong> <a href="#/detail/2/setting">/detail/2/setting </a></li>
+        <li><strong>(app.contact.detail.setting)</strong> <a href="#/detail/3/setting">/detail/3/setting </a></li>
+        <li><strong>(app.user.list)</strong> 
+            <strong>url:""</strong>
+            <a href="#/app/user">/app/user </a>
+            <p><strong>空路径，和父状态url一致，但有更高的优先级</strong></p>
+        </li>
+    </ul>
+    <script src="/lib/stateman/stateman.js"></script>
+
+    <script>
+var allConfig = {
+    title: 'Title',  // 属性可以是function，将取function得返回值，子状态没有指定title，将向上搜索父状态的title
+    url:'',
+
+}
+var config = {
+  enter: function(option){ console.log("enter: " + this.name + "; param: " + JSON.stringify(option.param)) },
+  leave: function(option){ console.log("leave: " + this.name + "; param: " + JSON.stringify(option.param)) },
+  update: function(option){ console.log("update: " + this.name + "; param: " + JSON.stringify(option.param)) },
+}
+
+function cfg(o){
+  o.enter = o.enter || config.enter  
+  o.leave = o.leave || config.leave  
+  o.update = o.update || config.update  
+  return o;
+}
+
+var stateman = new StateMan();
+
+stateman.state({
+
+  "app": config,
+  "app.contact":  config,
+  "app.contact.detail": cfg({url: "^/detail/:id(\\d+)"}),
+  "app.contact.detail.setting": config, 
+  "app.contact.message": config,
+  "app.user": cfg({
+    enter: function(option){
+      var done = option.async();
+      console.log(this.name + " is pending, 1s later to get into next state")
+      setTimeout(done, 1000)
+    },
+    leave: function(){
+      console.log(this.name + " is pending, 1s later to leave out")
+      return new Promise(function(resolve){
+        setTimeout(resolve, 1000)
+      })
+    }
+  }),
+  "app.user.list": cfg({url: ""})
+
+}).on("notfound", function(){
+  this.go('app') // if not found
+}).start();
+
+stateman.on("begin", function(option){
+  if(option.current.name === 'app.contact.message' && option.previous.name.indexOf("app.user") === 0){
+    option.stop();
+    alert(" nav from 'app.user.*' to 'app.contact.message' is stoped");
+  }
+})
+
+
+</script>
+</body>
+
+</html>

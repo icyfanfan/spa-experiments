@@ -1,0 +1,18 @@
+# logs
+*.log
+npm-debug.log*
+
+# dependencies
+/node_modules
+/lib
+
+# cache files
+.DS_Store
+.npm
+
+# build results
+/pub/*
+
+# local configs
+lauch.json 
+.vscode

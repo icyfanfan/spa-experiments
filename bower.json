@@ -1,0 +1,26 @@
+{
+  "name": "spa-experiments",
+  "description": "",
+  "authors": [
+    "icyfanfan <kisscat1990114@163.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/icyfanfan/SpaExperiments.git",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "nej": "0.3.5",
+    "regularjs": "0.4.3",
+    "regular-state": "0.2.1",
+    "stateman": "0.2.0",
+    "requirejs-regular": "0.3.0",
+    "requirejs": "2.3.2",
+    "bootstrap": ""
+  }
+}
