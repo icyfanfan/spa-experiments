@@ -19,3 +19,10 @@
 
 ```
 
+## 运行说明
+
+- 项目根目录下，bower install
+
+- 如全局安装了puer，根目录下运行puer
+
+- 页面入口/src/view/regular-state-demo/index.html
