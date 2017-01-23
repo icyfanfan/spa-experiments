@@ -1,5 +1,5 @@
 define([
-	"base",
+	"base/base",
 	"rgl!./sidebar.html"],
 function (Base, tpl) {
 

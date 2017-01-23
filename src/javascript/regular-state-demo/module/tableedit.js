@@ -1,5 +1,5 @@
 define([
-    "base",
+    "base/base",
     "rgl!./tableedit.html"],
 function (Base, tpl) {
 

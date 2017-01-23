@@ -5,16 +5,10 @@ require.config({
         'regularjs': '/lib/regularjs/dist/regular',
         'restate': '/lib/regular-state/restate',
         'stateman': '/lib/stateman/stateman',
-        'app': 'page/app',
-        'main': 'page/main',
-        'test1': 'page/test1',
-        'test2': 'page/test2',
-        'tablelist': 'module/tablelist',
-        'tabledetail': 'module/tabledetail',
-        'tableedit': 'module/tableedit',
-        'base': 'base/base',
-        'nav': 'module/nav',
-        'sidebar': 'module/sidebar',
+        'page': 'page',
+        'module': 'module',
+        'component': 'component',
+        'base': 'base',
     },
     rgl: {
       BEGIN: '{',
@@ -22,16 +16,16 @@ require.config({
     }
 });
 
-require([
+define([
     'restate',
     'regularjs',
-    'app',
-    'main',
-    'test1',
-    'test2',
-    'tablelist',
-    'tabledetail',
-    'tableedit',
+    'page/app',
+    'page/main',
+    'page/test1',
+    'page/test2',
+    'module/tablelist',
+    'module/tabledetail',
+    'module/tableedit',
 ], function(
     restate,
     Regular,

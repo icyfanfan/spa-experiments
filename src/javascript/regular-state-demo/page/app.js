@@ -1,7 +1,7 @@
 define([
-	"base",
-	"nav",
-	"sidebar",
+	"base/base",
+	"module/nav",
+	"module/sidebar",
 	"rgl!./app.html"],
 function (Base, HeadNav, SideBar, tpl) {
 
